@@ -1,0 +1,34 @@
+{
+  "name": "rr-sentry-otel",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "react-router build",
+    "dev": "react-router dev",
+    "start": "node --import ./app/instrument.server.mjs ./node_modules/.bin/react-router-serve ./build/server/index.js",
+    "typecheck": "react-router typegen && tsc -b"
+  },
+  "dependencies": {
+    "@react-router/fs-routes": "0.0.0-experimental-e0b6ce9",
+    "@react-router/node": "0.0.0-experimental-e0b6ce9",
+    "@react-router/serve": "0.0.0-experimental-e0b6ce9",
+    "@sentry/browser": "^10.20.0",
+    "@sentry/node": "^10.20.0",
+    "isbot": "latest",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router": "0.0.0-experimental-e0b6ce9"
+  },
+  "devDependencies": {
+    "@react-router/dev": "0.0.0-experimental-e0b6ce9",
+    "@types/node": "^20",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.3",
+    "vite-tsconfig-paths": "^5.1.4"
+  },
+  "author": "Charly Gomez",
+  "license": "ISC",
+  "description": ""
+}

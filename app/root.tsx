@@ -1,0 +1,55 @@
+import {
+  Link,
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+} from "react-router";
+import type { Route } from "./+types/root";
+
+export const middleware: Route.MiddlewareFunction[] = [
+  async ({ request }, next) => {
+    if (
+      request.url.endsWith("/.well-known/appspecific/com.chrome.devtools.json")
+    ) {
+      return new Response(null, { status: 404 });
+    }
+
+    await sleep();
+    let res = await next();
+    await sleep();
+    return res;
+  },
+];
+
+export function sleep(ms = Math.round(Math.random() * 500)) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+export async function loader() {
+  await sleep();
+  return null;
+}
+
+export function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        {children}
+        <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
+export default function App() {
+  return <Outlet />;
+}
